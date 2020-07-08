@@ -1,0 +1,37 @@
+body {
+  background-color: WhiteSmoke;
+}
+
+.table_del table {
+  float: left;
+}
+
+.table_del button {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+checkbox {
+
+}
+
+table {
+  width: 580px;
+  border-top: 1px solid;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th {
+  border-bottom: 1px solid;
+  padding: 10px;
+}
+
+td, tr {
+  border-bottom: 1px solid;
+}
+
+button {
+  width: 50px;
+  height: 25px;
+}

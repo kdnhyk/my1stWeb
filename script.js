@@ -1,58 +1,68 @@
-const textarea = document.getElementById('textarea');
-const addB = document.getElementById('addB');
-const table = document.getElementById('table');
-//const del = document.getElementById('del').cloneNode(true);
+const canvas = document.getElementById("canvas"),
+  ctx = canvas.getContext('2d');
 
-var month = 7;
+const n = 20;
+var count = 0;
 
-addB.addEventListener("click", addRow);
+init();
 
+function init() {
+  firstSet();
 
-function addRow() {
-  var contents = textarea.value;
-  var contArray = contents.split(" ");
+}
 
-  if (contArray.length == 4) {
-    var row = table.insertRow(table.length);
-    //날짜
-    var c0 = row.insertCell(0);
-    c0.innerHTML = month+"/"+contArray[0];
-
-    var c1 = row.insertCell(1);
-    c1.innerHTML = numberWithCommas(contArray[1]);
-
-    var c2 = row.insertCell(2);
-    c2.innerHTML = contArray[2];
-
-    var c3 = row.insertCell(3);
-    c3.innerHTML = contArray[3];
-
-    var c4 = row.insertCell(4);
-    c4.innerHTML = '<input type="checkbox" name="checkbox" value="">';
-
-    textarea.value = "";
-
-  } else {
-    //console.log("Error");
-    alert("띄어쓰기 3개로 구분해주세요");
+function firstSet() {
+  for (var i = 1; i < n; i++) {
+    ctx.beginPath();
+    ctx.fillStyle = "WhiteSmoke";
+    ctx.fillRect(30*i-1, 0, 2, 30*n);
+    ctx.closePath();
   }
+  for (var i = 1; i < n; i++) {
+    ctx.beginPath();
+    ctx.fillStyle = "WhiteSmoke";
+    ctx.fillRect(0, 30*i-1, 30*n, 2);
+    ctx.closePath();
+  }
+  ctx.beginPath();
+  ctx.fillStyle = "WhiteSmoke";
+  ctx.fillRect(0, 0, 30*n, 1);
+  ctx.fillRect(0, 0, 1, 30*n);
+  ctx.fillRect(30*n-1, 0, 1, 30*n);
+  ctx.fillRect(0, 30*n-1, 30*n, 1);
+  ctx.closePath();
 
-}
+  canvas.addEventListener("click", function(event) {
+    if (count < 2) {
+      if (count == 0) var g1 = new Green(event);
+      if (count == 1) var b1 = new Blue(event);
+      count += 1;
+    }else {
+      // red=imgData.data[0];
+      // green=imgData.data[1];
+      // blue=imgData.data[2];
+      // alpha=imgData.data[3];
+      var color = ctx.getImageData(event.x, event.y, 1, 1).data;
+      if (color[1] == 128) {
+        console.log(color);
+      }
+      if (color[2] == 255) {
 
-function delRow() {
-  table.deleteRow();
-}
-
-function sort() {
-
-}
-
-function pressEnter(){
-        if(event.keyCode == 13){
-            addRow();
-        }
+      }
     }
+  });
+}
 
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+function Green(event) {
+  ctx.beginPath();
+  ctx.fillStyle = "green";
+  ctx.fillRect(event.x, event.y, 60, 60);
+  ctx.closePath();
+}
+
+function Blue(event) {
+  ctx.beginPath();
+  ctx.fillStyle = "blue";
+  ctx.fillRect(event.x, event.y, 60, 60);
+  ctx.closePath();
 }

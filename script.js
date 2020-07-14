@@ -15,12 +15,6 @@ function init() {
 
 function firstSet() {
 
-  // 초기화
-  ctx.beginPath();
-  ctx.fillStyle = "#996434";
-  ctx.fillRect(0, 0, 30*n, 30*n);
-  ctx.closePath();
-
   for (var i = 1; i < n; i++) {
     ctx.beginPath();
     ctx.fillStyle = "Black";
@@ -54,8 +48,37 @@ function firstSet() {
   });
 
   restart.addEventListener("click", function(event) {
-    firstSet();
+    reset();
   });
+}
+
+function reset() {
+  // 초기화
+  ctx.beginPath();
+  ctx.fillStyle = "#996434";
+  ctx.fillRect(0, 0, 30*n, 30*n);
+  ctx.closePath();
+  box = [];
+
+  for (var i = 1; i < n; i++) {
+    ctx.beginPath();
+    ctx.fillStyle = "Black";
+    ctx.fillRect(30*i-1, 0, 2, 30*n);
+    ctx.closePath();
+  }
+  for (var i = 1; i < n; i++) {
+    ctx.beginPath();
+    ctx.fillStyle = "Black";
+    ctx.fillRect(0, 30*i-1, 30*n, 2);
+    ctx.closePath();
+  }
+  ctx.beginPath();
+  ctx.fillStyle = "Black";
+  ctx.fillRect(0, 0, 30*n, 1);
+  ctx.fillRect(0, 0, 1, 30*n);
+  ctx.fillRect(30*n-1, 0, 1, 30*n);
+  ctx.fillRect(0, 30*n-1, 30*n, 1);
+  ctx.closePath();
 }
 
 function Black(e) {
